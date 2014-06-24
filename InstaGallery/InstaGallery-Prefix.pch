@@ -1,0 +1,53 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#define UIColorFromRGB(rgbValue, a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
+
+#define bgBlackTransparentColor UIColorFromRGB(0x000000, 0.8)
+
+
+#define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
+
+#define RGB(x, y, z, a) [UIColor colorWithRed:x/255. green:y/255. blue:z/255. alpha:a]
+
+#define LocateUnder(view1, view2, offset)  \
+do { \
+    CGRect frame = view1.frame; \
+    frame.origin.y = (view2.frame.origin.y + view2.frame.size.height + offset); \
+    view1.frame = frame; \
+    [view2.superview addSubview:view1]; \
+}while(0);
+
+#define LocateAbove(view1, view2, offset)  \
+do { \
+    CGRect frame = view1.frame; \
+    frame.origin.y = (view2.frame.origin.y - view2.frame.size.height + offset); \
+    view1.frame = frame; \
+    [view2.superview addSubview:view1]; \
+}while(0);
+
+#define LocateLeft(view1, view2, offsetX, offsetY) \
+do { \
+    CGRect frame = view1.frame; \
+    frame.origin.x = view2.center.x/2 - frame.size.width/2 - offsetX; \
+    frame.origin.y = view2.center.y - frame.size.height/2 - offsetY; \
+    view1.frame = frame; \
+    [view2.superview addSubview:view1]; \
+}while(0)
+
+
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <AssetsLibrary/AssetsLibrary.h>
+#endif
