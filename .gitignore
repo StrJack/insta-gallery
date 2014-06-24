@@ -6,3 +6,6 @@
 #
 # Pods/
 
+.DS_STORE
+xcuserdata
+InstaGallery.xcodeproj/project.xcworkspace/*

@@ -39,7 +39,7 @@
     CGContextStrokePath(context);
     
     ellipseRect = CGRectInset(ellipseRect, 7, 7);
-    CGContextSetFillColor(context, CGColorGetComponents(RGB(255, 200, 69, 1).CGColor));
+    CGContextSetFillColor(context, CGColorGetComponents(COLOR_PANTONE_1225.CGColor));
     CGContextFillEllipseInRect(context, ellipseRect);
     
 }

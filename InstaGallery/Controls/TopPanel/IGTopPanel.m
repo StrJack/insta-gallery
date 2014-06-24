@@ -25,7 +25,7 @@
         self.backgroundColor = bgBlackTransparentColor;
         
         UILabel *lblTitle = [[UILabel alloc] initWithFrame:self.bounds];
-        lblTitle.font = [UIFont boldSystemFontOfSize:21.0f];
+        lblTitle.font = [UIFont boldSystemFontOfSize:18.0f];
         lblTitle.textAlignment = NSTextAlignmentCenter;
         lblTitle.textColor = [UIColor whiteColor];
         lblTitle.text = title;
