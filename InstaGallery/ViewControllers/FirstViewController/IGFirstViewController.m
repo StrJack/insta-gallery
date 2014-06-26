@@ -56,6 +56,8 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.secondViewController = nil;
+    
     [self.topPanel removeFromSuperview];
     self.topPanel = [[IGTopPanel alloc]
                      initWithLeftButton:[[[IGCloseButton alloc] init] addTarget:self action:@selector(closePage)]
@@ -81,6 +83,10 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
     LocateLeft(self.pickerButton, self.shotButton, 20.0, 0.0);
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+
 #pragma mark - Shows
 - (void)updateToShowCropAndScale {
     IGTopPanel *newTopPanel = [[IGTopPanel alloc] initWithLeftButton:[[IGPreviousButton alloc] init] rightButton:nil titleString:@"SCALE & CROP" forView:self.view];
@@ -90,11 +96,13 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
     IGTablePanel *newTablePanel = [[IGTablePanel alloc] initRelativelyLast:self.grid andBase:self.view];
     [self.tablePanel shouldChangeWithNew:newTablePanel derection:(IGDirectionTypeRight)];
     
-    [self performSelector:@selector(showNextViewController) withObject:nil afterDelay:0.5];
+    [self shot];
+//    [self performSelector:@selector(showNextViewController) withObject:nil afterDelay:0.5];
 }
 
 - (void)showNextViewController {
-    [self presentViewController:[[IGSecondViewController alloc] initWithPreviousViewController:self] animated:NO completion:nil];
+    
+    [self presentViewController:self.secondViewController animated:NO completion:nil];
 }
 
 #pragma mark - Actions
@@ -132,20 +140,34 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
-    
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
     if (picker != self) {
         [picker dismissViewControllerAnimated:YES completion:^{
-            [self imagePickerController:self didFinishPickingImage:image editingInfo:nil];
+            UIImage *newImage = rotate(image, UIImageOrientationDown);
+            CGRect gridRect = CGRectMake(0.0f, (newImage.size.height - newImage.size.width)/2, newImage.size.width, newImage.size.width);
+            _resultImage = [IGFirstViewController cropImage:image byRect:gridRect];
+            
+            self.secondViewController = [[IGSecondViewController alloc] initWithPreviousViewController:self];
+            [self showNextViewController];
+//            [self updateToShowCropAndScale];
+//            [self imagePickerController:self didFinishPickingImage:image editingInfo:nil];
         }];
         return;
     }
-    [self.grid shot];
+    
     image = rotate(image, UIImageOrientationDown);
     
     CGRect gridRect = CGRectMake(0.0f, (image.size.height - image.size.width)/2, image.size.width, image.size.width);
     _resultImage = [IGFirstViewController cropImage:image byRect:gridRect];
     
-    [self updateToShowCropAndScale];
+    if (self.secondViewController) {
+        [self showNextViewController];
+        [self.secondViewController updateImage:_resultImage];
+    } else {
+        [self.grid shot];
+        self.secondViewController = [[IGSecondViewController alloc] initWithPreviousViewController:self];
+        [self updateToShowCropAndScale];
+    }
 }
 
 #pragma mark - Additional Functions

@@ -88,7 +88,7 @@
     UIView *shadow = [[UIView alloc] initWithFrame:self.tablePanel.frame];
     shadow.backgroundColor = [UIColor clearColor];
     shadow.userInteractionEnabled = NO;
-    [self drawInnerShadowOnView:shadow shadowWidth:16.];
+    [IGInnerShadow drawInnerShadowOnView:shadow shadowWidth:16.];
     [self.tablePanel addSubview:shadow];
 }
 
@@ -106,28 +106,6 @@
 #pragma mark - Actions
 - (void)close {
     [self updateToTakePhoto];
-}
-
-#pragma mark - Shadows
-- (void)drawInnerShadowOnView:(UIView *)view shadowWidth:(CGFloat)shadowWidth {
-    UIImageView *innerShadowView = [[UIImageView alloc] initWithFrame:CGRectMake(-shadowWidth, -shadowWidth, view.frame.size.width+shadowWidth*2, view.frame.size.height+shadowWidth*2)];
-    
-    innerShadowView.contentMode = UIViewContentModeScaleToFill;
-    innerShadowView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    [view addSubview:innerShadowView];
-    
-    [innerShadowView.layer setMasksToBounds:YES];
-    
-    [innerShadowView.layer setBorderColor:[UIColor redColor].CGColor];
-    [innerShadowView.layer setShadowColor:[UIColor blackColor].CGColor];
-    [innerShadowView.layer setBorderWidth:shadowWidth];
-    
-    [innerShadowView.layer setShadowOffset:CGSizeMake(0, shadowWidth/2)];
-    [innerShadowView.layer setShadowOpacity:1.0];
-    
-    // this is the inner shadow thickness
-    [innerShadowView.layer setShadowRadius:10.5];
 }
 
 #pragma mark - Actions

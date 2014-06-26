@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class IGTopPanel, IGTopPanel, IGTablePanel, IGWaiter, IGShotButton, IGPickerButton, IGGrid;
+@class IGTopPanel, IGTopPanel, IGTablePanel, IGWaiter, IGShotButton, IGPickerButton, IGGrid, IGSecondViewController;
 
 @interface IGFirstViewController : UIImagePickerController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property(nonatomic, strong) UIImage *resultImage;
 
+@property (nonatomic, strong) IGSecondViewController *secondViewController;
 @property (nonatomic, strong) IGTopPanel *topPanel;
 @property (nonatomic, strong) IGTopPanel *middlePanel;
 @property (nonatomic, strong) IGTablePanel *tablePanel;

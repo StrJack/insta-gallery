@@ -15,7 +15,9 @@
 #import "IGCloseButton.h"
 #import "IGPreviousButton.h"
 
-@interface IGSecondViewController : UIViewController {
+#import "IGPhotoGaleryView.h"
+
+@interface IGSecondViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, IGPhotoGaleryDelegate> {
     UIImage *_image;
 }
 
@@ -25,6 +27,8 @@
 @property (nonatomic, strong) UIImageView *imageView;
 
 - (id)initWithPreviousViewController:(IGFirstViewController *)firstViewController;
-- (id)initWithImage:(UIImage*)image;
+- (id)initWithImage:(UIImage *)image;
+
+- (void)updateImage:(UIImage *)image;
 
 @end

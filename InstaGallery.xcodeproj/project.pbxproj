@@ -54,6 +54,7 @@
 		AAE38F1C1957A437000F6E5F /* ruler.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE38F1A1957A437000F6E5F /* ruler.png */; };
 		AAE38F1D1957A437000F6E5F /* ruler@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE38F1B1957A437000F6E5F /* ruler@2x.png */; };
 		AAE38F201957A455000F6E5F /* IGRulerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE38F1F1957A455000F6E5F /* IGRulerButton.m */; };
+		AAE391111959B464000F6E5F /* IGPhotoGaleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE391101959B464000F6E5F /* IGPhotoGaleryView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,8 @@
 		AAE38F1B1957A437000F6E5F /* ruler@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ruler@2x.png"; sourceTree = "<group>"; };
 		AAE38F1E1957A455000F6E5F /* IGRulerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRulerButton.h; sourceTree = "<group>"; };
 		AAE38F1F1957A455000F6E5F /* IGRulerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRulerButton.m; sourceTree = "<group>"; };
+		AAE3910F1959B464000F6E5F /* IGPhotoGaleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGPhotoGaleryView.h; sourceTree = "<group>"; };
+		AAE391101959B464000F6E5F /* IGPhotoGaleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGPhotoGaleryView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -403,6 +406,8 @@
 				AA8E18581953913200780110 /* IGHorizontalScroller.m */,
 				AAE38F0019575593000F6E5F /* IGWaiter.h */,
 				AAE38F0119575593000F6E5F /* IGWaiter.m */,
+				AAE3910F1959B464000F6E5F /* IGPhotoGaleryView.h */,
+				AAE391101959B464000F6E5F /* IGPhotoGaleryView.m */,
 			);
 			name = Other;
 			path = InstaGallery/Other;
@@ -536,6 +541,7 @@
 				AA8E17EA194F961D00780110 /* main.m in Sources */,
 				AAE38F0219575593000F6E5F /* IGWaiter.m in Sources */,
 				AA8E18551952F2B900780110 /* IGInnerShadow.m in Sources */,
+				AAE391111959B464000F6E5F /* IGPhotoGaleryView.m in Sources */,
 				AA8E1821194FB49100780110 /* IGBaseButton.m in Sources */,
 				AA8E1832194FD4A000780110 /* IGMiddlePanel.m in Sources */,
 				AA8E1817194F9F8500780110 /* IGTopPanel.m in Sources */,

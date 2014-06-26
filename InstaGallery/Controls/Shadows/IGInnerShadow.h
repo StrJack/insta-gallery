@@ -10,4 +10,6 @@
 
 @interface IGInnerShadow : UIView
 
++ (void)drawInnerShadowOnView:(UIView *)view shadowWidth:(CGFloat)shadowWidth;
+
 @end

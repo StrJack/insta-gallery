@@ -10,38 +10,26 @@
 
 @implementation IGInnerShadow
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor clearColor];
-//        [[self layer] setMasksToBounds:YES];
-//        [[self layer] setCornerRadius:10.0f];
-//        [[self layer] setBorderColor:[[UIColor blackColor] CGColor]];
-//        [[self layer] setBorderWidth:12.0f];
-//        [[self layer] setShadowColor:[[UIColor blackColor] CGColor]];
-//        [[self layer] setShadowOffset:CGSizeMake(0, 10)];
-//        [[self layer] setShadowOpacity:1];
-//        [[self layer] setShadowRadius:12.0];
-
-        CALayer *innerShadowOwnerLayer = [[CALayer alloc]init];
-        innerShadowOwnerLayer.frame = CGRectMake(0, 0, self.frame.size.width, 10);
-        innerShadowOwnerLayer.backgroundColor = [UIColor whiteColor].CGColor;
-        
-        innerShadowOwnerLayer.shadowColor = [UIColor blackColor].CGColor;
-        innerShadowOwnerLayer.shadowOffset = CGSizeMake(0, 0);
-        innerShadowOwnerLayer.shadowRadius = 15.0;
-        innerShadowOwnerLayer.shadowOpacity = 1;
-        
-        [self.layer addSublayer:innerShadowOwnerLayer];
-        
-    }
-    return self;
+#pragma mark - Shadows
++ (void)drawInnerShadowOnView:(UIView *)view shadowWidth:(CGFloat)shadowWidth {
+    UIImageView *innerShadowView = [[UIImageView alloc] initWithFrame:CGRectMake(-shadowWidth, -shadowWidth, view.frame.size.width+shadowWidth*2, view.frame.size.height+shadowWidth*2)];
+    
+    innerShadowView.contentMode = UIViewContentModeScaleToFill;
+    innerShadowView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [view addSubview:innerShadowView];
+    
+    [innerShadowView.layer setMasksToBounds:YES];
+    
+    [innerShadowView.layer setBorderColor:[UIColor redColor].CGColor];
+    [innerShadowView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [innerShadowView.layer setBorderWidth:shadowWidth];
+    
+    [innerShadowView.layer setShadowOffset:CGSizeMake(0, shadowWidth/2)];
+    [innerShadowView.layer setShadowOpacity:1.0];
+    
+    // this is the inner shadow thickness
+    [innerShadowView.layer setShadowRadius:10.5];
 }
-
-- (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-}
-
 
 @end
