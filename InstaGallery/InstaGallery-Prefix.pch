@@ -17,6 +17,16 @@
 
 #define COLOR_PANTONE_1225 RGB(255, 200, 69, 1)
 
+
+//#define LocateViewBetween(view, viewTop, viewBottom)  \
+//do { \
+//    CGRect viewFrame = view.frame; \
+//    CGRect topViewFrame = viewTop.frame; \
+//    CGRect bottomViewFrame = viewBottom.frame; \
+//    \
+//    \
+//}while(0);
+
 #define LocateUnder(view1, view2, offset)  \
 do { \
     CGRect frame = view1.frame; \
@@ -28,7 +38,7 @@ do { \
 #define LocateAbove(view1, view2, offset)  \
 do { \
     CGRect frame = view1.frame; \
-    frame.origin.y = (view2.frame.origin.y - view2.frame.size.height + offset); \
+    frame.origin.y = (view2.frame.origin.y - view1.frame.size.height + offset); \
     view1.frame = frame; \
     [view2.superview addSubview:view1]; \
 }while(0);

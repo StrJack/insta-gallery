@@ -55,6 +55,18 @@
 		AAE38F1D1957A437000F6E5F /* ruler@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE38F1B1957A437000F6E5F /* ruler@2x.png */; };
 		AAE38F201957A455000F6E5F /* IGRulerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE38F1F1957A455000F6E5F /* IGRulerButton.m */; };
 		AAE391111959B464000F6E5F /* IGPhotoGaleryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE391101959B464000F6E5F /* IGPhotoGaleryView.m */; };
+		AAE39113195C688D000F6E5F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE39112195C688D000F6E5F /* AVFoundation.framework */; };
+		AAE39117195DE241000F6E5F /* UIImage+Contrast.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE39116195DE241000F6E5F /* UIImage+Contrast.m */; };
+		AAE3911A195DEBA2000F6E5F /* contrast.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE39118195DEBA2000F6E5F /* contrast.png */; };
+		AAE3911B195DEBA2000F6E5F /* contrast@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE39119195DEBA2000F6E5F /* contrast@2x.png */; };
+		AAE3911E195DEBF8000F6E5F /* IGContrastButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE3911D195DEBF8000F6E5F /* IGContrastButton.m */; };
+		AAE39124195DF7F7000F6E5F /* UIImage+Brightness.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE39123195DF7F7000F6E5F /* UIImage+Brightness.m */; };
+		AAE39127195E067C000F6E5F /* rotation.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE39125195E067C000F6E5F /* rotation.png */; };
+		AAE39128195E067C000F6E5F /* rotation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE39126195E067C000F6E5F /* rotation@2x.png */; };
+		AAE3912B195E0697000F6E5F /* IGRotationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE3912A195E0697000F6E5F /* IGRotationButton.m */; };
+		AAE3912E195F32B1000F6E5F /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE3912C195F32B1000F6E5F /* brightness.png */; };
+		AAE3912F195F32B1000F6E5F /* brightness@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE3912D195F32B1000F6E5F /* brightness@2x.png */; };
+		AAE39132195F32CA000F6E5F /* IGBrigtnessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE39131195F32CA000F6E5F /* IGBrigtnessButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +161,23 @@
 		AAE38F1F1957A455000F6E5F /* IGRulerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRulerButton.m; sourceTree = "<group>"; };
 		AAE3910F1959B464000F6E5F /* IGPhotoGaleryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGPhotoGaleryView.h; sourceTree = "<group>"; };
 		AAE391101959B464000F6E5F /* IGPhotoGaleryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGPhotoGaleryView.m; sourceTree = "<group>"; };
+		AAE39112195C688D000F6E5F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AAE39115195DE241000F6E5F /* UIImage+Contrast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Contrast.h"; sourceTree = "<group>"; };
+		AAE39116195DE241000F6E5F /* UIImage+Contrast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Contrast.m"; sourceTree = "<group>"; };
+		AAE39118195DEBA2000F6E5F /* contrast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contrast.png; sourceTree = "<group>"; };
+		AAE39119195DEBA2000F6E5F /* contrast@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contrast@2x.png"; sourceTree = "<group>"; };
+		AAE3911C195DEBF8000F6E5F /* IGContrastButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGContrastButton.h; sourceTree = "<group>"; };
+		AAE3911D195DEBF8000F6E5F /* IGContrastButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGContrastButton.m; sourceTree = "<group>"; };
+		AAE39122195DF7F7000F6E5F /* UIImage+Brightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Brightness.h"; sourceTree = "<group>"; };
+		AAE39123195DF7F7000F6E5F /* UIImage+Brightness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Brightness.m"; sourceTree = "<group>"; };
+		AAE39125195E067C000F6E5F /* rotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotation.png; sourceTree = "<group>"; };
+		AAE39126195E067C000F6E5F /* rotation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rotation@2x.png"; sourceTree = "<group>"; };
+		AAE39129195E0697000F6E5F /* IGRotationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRotationButton.h; sourceTree = "<group>"; };
+		AAE3912A195E0697000F6E5F /* IGRotationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRotationButton.m; sourceTree = "<group>"; };
+		AAE3912C195F32B1000F6E5F /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brightness.png; sourceTree = "<group>"; };
+		AAE3912D195F32B1000F6E5F /* brightness@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brightness@2x.png"; sourceTree = "<group>"; };
+		AAE39130195F32CA000F6E5F /* IGBrigtnessButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGBrigtnessButton.h; sourceTree = "<group>"; };
+		AAE39131195F32CA000F6E5F /* IGBrigtnessButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGBrigtnessButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE39113195C688D000F6E5F /* AVFoundation.framework in Frameworks */,
 				AA8E183919505B6800780110 /* AssetsLibrary.framework in Frameworks */,
 				AA8E18341950599800780110 /* MediaPlayer.framework in Frameworks */,
 				AA8E17E0194F961D00780110 /* CoreGraphics.framework in Frameworks */,
@@ -199,6 +229,7 @@
 		AA8E17DC194F961D00780110 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAE39112195C688D000F6E5F /* AVFoundation.framework */,
 				AA8E183819505B6800780110 /* AssetsLibrary.framework */,
 				AA8E18331950599800780110 /* MediaPlayer.framework */,
 				AA8E17DD194F961D00780110 /* Foundation.framework */,
@@ -344,6 +375,12 @@
 				AAE38F1819579D34000F6E5F /* IGFlashButton.m */,
 				AAE38F1E1957A455000F6E5F /* IGRulerButton.h */,
 				AAE38F1F1957A455000F6E5F /* IGRulerButton.m */,
+				AAE3911C195DEBF8000F6E5F /* IGContrastButton.h */,
+				AAE3911D195DEBF8000F6E5F /* IGContrastButton.m */,
+				AAE39129195E0697000F6E5F /* IGRotationButton.h */,
+				AAE3912A195E0697000F6E5F /* IGRotationButton.m */,
+				AAE39130195F32CA000F6E5F /* IGBrigtnessButton.h */,
+				AAE39131195F32CA000F6E5F /* IGBrigtnessButton.m */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -360,6 +397,7 @@
 		AA8E18401950D50A00780110 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				AAE39114195DE241000F6E5F /* Image Adjust */,
 				AA8E18411950D53000780110 /* Filtrr */,
 			);
 			path = ThirdPart;
@@ -416,6 +454,12 @@
 		AAE38F06195796AE000F6E5F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AAE3912C195F32B1000F6E5F /* brightness.png */,
+				AAE3912D195F32B1000F6E5F /* brightness@2x.png */,
+				AAE39125195E067C000F6E5F /* rotation.png */,
+				AAE39126195E067C000F6E5F /* rotation@2x.png */,
+				AAE39118195DEBA2000F6E5F /* contrast.png */,
+				AAE39119195DEBA2000F6E5F /* contrast@2x.png */,
 				AAE38F1A1957A437000F6E5F /* ruler.png */,
 				AAE38F1B1957A437000F6E5F /* ruler@2x.png */,
 				AAE38F1019579C49000F6E5F /* flash.png */,
@@ -424,6 +468,17 @@
 				AAE38F09195796E2000F6E5F /* frontal@2x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		AAE39114195DE241000F6E5F /* Image Adjust */ = {
+			isa = PBXGroup;
+			children = (
+				AAE39122195DF7F7000F6E5F /* UIImage+Brightness.h */,
+				AAE39123195DF7F7000F6E5F /* UIImage+Brightness.m */,
+				AAE39115195DE241000F6E5F /* UIImage+Contrast.h */,
+				AAE39116195DE241000F6E5F /* UIImage+Contrast.m */,
+			);
+			path = "Image Adjust";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -502,12 +557,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE39127195E067C000F6E5F /* rotation.png in Resources */,
 				AA8E17E8194F961D00780110 /* InfoPlist.strings in Resources */,
+				AAE3911A195DEBA2000F6E5F /* contrast.png in Resources */,
+				AAE3912F195F32B1000F6E5F /* brightness@2x.png in Resources */,
 				AAE38F1319579C49000F6E5F /* flash@2x.png in Resources */,
+				AAE39128195E067C000F6E5F /* rotation@2x.png in Resources */,
 				AAE38F0C195796E2000F6E5F /* frontal@2x.png in Resources */,
 				AAE38F1D1957A437000F6E5F /* ruler@2x.png in Resources */,
+				AAE3912E195F32B1000F6E5F /* brightness.png in Resources */,
 				AA8E17F0194F961D00780110 /* Images.xcassets in Resources */,
 				AAE38F1219579C49000F6E5F /* flash.png in Resources */,
+				AAE3911B195DEBA2000F6E5F /* contrast@2x.png in Resources */,
 				AAE38F1C1957A437000F6E5F /* ruler.png in Resources */,
 				AAE38F0B195796E2000F6E5F /* frontal.png in Resources */,
 			);
@@ -529,11 +590,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA8E17EE194F961D00780110 /* IGAppDelegate.m in Sources */,
+				AAE3912B195E0697000F6E5F /* IGRotationButton.m in Sources */,
+				AAE39117195DE241000F6E5F /* UIImage+Contrast.m in Sources */,
+				AAE39132195F32CA000F6E5F /* IGBrigtnessButton.m in Sources */,
 				AA8E183F19508BA300780110 /* IGNextButton.m in Sources */,
 				AAE38F201957A455000F6E5F /* IGRulerButton.m in Sources */,
 				AA8E182F194FC96400780110 /* IGBaseView.m in Sources */,
 				AA8E182C194FC69800780110 /* IGGrid.m in Sources */,
 				AAE38F0519577D50000F6E5F /* IGPreviousButton.m in Sources */,
+				AAE3911E195DEBF8000F6E5F /* IGContrastButton.m in Sources */,
 				AA8E184D1950EBAE00780110 /* IGThirdViewController.m in Sources */,
 				AA8E18591953913200780110 /* IGHorizontalScroller.m in Sources */,
 				AA8E184A1950D53000780110 /* UIImage+Scale.m in Sources */,
@@ -555,6 +620,7 @@
 				AA8E1824194FC1D500780110 /* IGSecondViewController.m in Sources */,
 				AA8E181E194FB46000780110 /* IGShotButton.m in Sources */,
 				AAE38F1919579D34000F6E5F /* IGFlashButton.m in Sources */,
+				AAE39124195DF7F7000F6E5F /* UIImage+Brightness.m in Sources */,
 				AAE38F0F1957976B000F6E5F /* IGFrontalButton.m in Sources */,
 				AAE38F1619579C85000F6E5F /* IGBasePicturedButton.m in Sources */,
 				AA8E18511952DB1C00780110 /* IGFilterTableViewCell.m in Sources */,

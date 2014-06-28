@@ -96,9 +96,6 @@
 #pragma mark - IGPhotoGaleryDelegate
 - (void)gotImageFromLibrary:(UIImage *)image {
     [self.imageView.layer setMasksToBounds:YES];
-//    [self.imageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.imageView.layer setBorderWidth:4.];
-//    self.imageView.frame = CGRectMake(0, 0, 320, image.size )
     self.imageView.image = image;
 }
 

@@ -11,15 +11,25 @@
 
 #import "IGFilterScrollerViewCell.h"
 
+#import "IGMiddlePanel.h"
+#import "IGRulerButton.h"
+#import "IGRotationButton.h"
+#import "IGContrastButton.h"
+#import "IGBrigtnessButton.h"
 #import "IGHorizontalScroller.h"
 #import "IGInnerShadow.h"
 
+#import "UIImage+Brightness.h"
+#import "UIImage+Contrast.h"
 #import "UIImage+FiltrrCompositions.h"
 
 #define NUM_FILTERS             11
 #define FILTER_LEFT_PADDING     3
 
 @interface IGThirdViewController ()
+
+@property (nonatomic, strong) IGHorizontalScroller *horizontalScroller;
+@property (nonatomic, strong) IGMiddlePanel *middlePanel;
 
 @end
 
@@ -76,13 +86,23 @@
     self.topPanel.title.text = @"EDIT";
     
     
-    IGHorizontalScroller *horizontalScroller = [[IGHorizontalScroller alloc] initWithCellType:[IGFilterScrollerViewCell class]];
-    horizontalScroller.center = CGPointMake(self.tablePanel.frame.size.width/2, self.tablePanel.bounds.size.height - [IGFilterScrollerViewCell cellHeight]/2);
+    self.horizontalScroller = [[IGHorizontalScroller alloc] initWithCellType:[IGFilterScrollerViewCell class]];
+    self.horizontalScroller.center = CGPointMake(self.tablePanel.frame.size.width/2, self.tablePanel.bounds.size.height - [IGFilterScrollerViewCell cellHeight]/2);
     
-    [horizontalScroller addSubview:contentView];
-    [horizontalScroller setContentSize:contentView.bounds.size];
+    [self.horizontalScroller addSubview:contentView];
+    [self.horizontalScroller setContentSize:contentView.bounds.size];
     
-    [self.tablePanel addSubview:horizontalScroller];
+    [self.tablePanel addSubview:self.horizontalScroller];
+    
+    // straighten tools
+    self.middlePanel = [[IGMiddlePanel alloc] initWithLeftButton:[[[IGBrigtnessButton alloc] init] addTarget:self action:@selector(makeBrightness)]
+                                                     rightButton:[[[IGRotationButton alloc] init] addTarget:self action:@selector(makeRotation)]
+                                                    middleButton:[[[IGContrastButton alloc] init] addTarget:self action:@selector(makeContrast)]];
+    CGRect middlePanelFrame = self.middlePanel.bounds;
+    middlePanelFrame.size.height = self.tablePanel.frame.size.height - self.horizontalScroller.frame.size.height;
+    self.middlePanel.frame = middlePanelFrame;
+    
+    LocateAbove(self.middlePanel, self.horizontalScroller, 0);
     
     
     UIView *shadow = [[UIView alloc] initWithFrame:self.tablePanel.frame];
@@ -104,8 +124,31 @@
 }
 
 #pragma mark - Actions
+- (void)makeContrast {
+    self.middlePanel.middleButton.selected = !self.middlePanel.middleButton.selected;
+    
+    if (self.middlePanel.middleButton.selected)
+        self.imageView.image = [self.imageView.image imageWithContrast:1.4];
+    else
+        self.imageView.image = _image;
+    
+}
+
+- (void)makeBrightness {
+    self.middlePanel.leftButton.selected = !self.middlePanel.leftButton.selected;
+    
+    if (self.middlePanel.leftButton.selected)
+        self.imageView.image = [self.imageView.image imageWithBrightness:1.5];
+    else
+        self.imageView.image = _image;
+}
+
 - (void)close {
     [self updateToTakePhoto];
+}
+
+- (void)makeRotation {
+    
 }
 
 #pragma mark - Actions

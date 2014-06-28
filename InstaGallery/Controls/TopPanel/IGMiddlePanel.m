@@ -28,5 +28,12 @@
     return self;
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    
+    self.leftButton.center = CGPointMake(self.leftButton.center.x, frame.size.height/2);
+    self.middleButton.center = CGPointMake(self.middleButton.center.x, frame.size.height/2);
+    self.rightButton.center = CGPointMake(self.rightButton.center.x, frame.size.height/2);
+}
 
 @end

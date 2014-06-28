@@ -149,8 +149,6 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
             
             self.secondViewController = [[IGSecondViewController alloc] initWithPreviousViewController:self];
             [self showNextViewController];
-//            [self updateToShowCropAndScale];
-//            [self imagePickerController:self didFinishPickingImage:image editingInfo:nil];
         }];
         return;
     }
