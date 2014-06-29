@@ -11,7 +11,8 @@
 #define bgBlackTransparentColor UIColorFromRGB(0x000000, 0.8)
 
 
-#define SCREEN_WIDTH    [UIScreen mainScreen].bounds.size.width
+#define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
+#define IS_4INCH_SCREEN     ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && [UIScreen mainScreen].bounds.size.height == 568.0)
 
 #define RGB(x, y, z, a) [UIColor colorWithRed:x/255. green:y/255. blue:z/255. alpha:a]
 

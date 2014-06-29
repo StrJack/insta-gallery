@@ -15,8 +15,9 @@
 @implementation IGShotButton
 
 - (id)initForView:(UIView*)baseView {
+    CGFloat btnLength = baseView.bounds.size.height < flBtnSide ? baseView.bounds.size.height*0.85 : flBtnSide;
     
-    if (self = [super initWithFrame:(CGRectMake(0.0f, 0.0f, flBtnSide, flBtnSide))]) {
+    if (self = [super initWithFrame:(CGRectMake(0.0f, 0.0f, btnLength, btnLength))]) {
         self.center = CGPointMake(baseView.bounds.size.width/2, baseView.bounds.size.height/2);
         [baseView addSubview:self];
     }
@@ -26,15 +27,17 @@
 
 - (void)drawRect:(CGRect)rect {
     
+    CGFloat lineWidth = IS_4INCH_SCREEN ? flLineWidth : 2;
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextSetLineCap(context, kCGLineCapRound);
     
-    CGContextSetLineWidth(context, flLineWidth);
+    CGContextSetLineWidth(context, lineWidth);
     
     CGRect ellipseRect = rect;
-    ellipseRect.size.width = ellipseRect.size.height -= flLineWidth*2;
-    ellipseRect.origin.x = ellipseRect.origin.y += flLineWidth;
+    ellipseRect.size.width = ellipseRect.size.height -= lineWidth*2;
+    ellipseRect.origin.x = ellipseRect.origin.y += lineWidth;
     CGContextAddEllipseInRect(context, ellipseRect);
     CGContextStrokePath(context);
     
