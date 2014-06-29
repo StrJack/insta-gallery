@@ -9,10 +9,10 @@
 #import "IGFilterScrollerViewCell.h"
 
 #define CELL_PADDING        5
-#define CELL_WIDTH          IS_4INCH_SCREEN ? 74 : 64
-#define CELL_HEIGHT         IS_4INCH_SCREEN ? 104 : 64
+#define CELL_WIDTH          (IS_4INCH_SCREEN ? 74 : 64)
+#define CELL_HEIGHT         (IS_4INCH_SCREEN ? 104 : 64)
 
-#define THUMBNAIL_WIDTH     IS_4INCH_SCREEN ? 64.0 : 44
+#define THUMBNAIL_WIDTH     (IS_4INCH_SCREEN ? 64.0 : 44)
 
 @interface IGFilterScrollerViewCell()
 
