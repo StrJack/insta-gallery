@@ -36,6 +36,7 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
 @implementation IGFirstViewController
 
 + (void)acomplishWithImage:(UIImage *)image {
+    NSLog(@"");
     static_completion_block(image, static_image_picker);
 }
 
@@ -96,8 +97,8 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
     IGTablePanel *newTablePanel = [[IGTablePanel alloc] initRelativelyLast:self.grid andBase:self.view];
     [self.tablePanel shouldChangeWithNew:newTablePanel derection:(IGDirectionTypeRight)];
     
-    [self shot];
-//    [self performSelector:@selector(showNextViewController) withObject:nil afterDelay:0.5];
+//    [self shot];
+    [self performSelector:@selector(showNextViewController) withObject:nil afterDelay:0.5];
 }
 
 - (void)showNextViewController {
@@ -123,7 +124,9 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
 }
 
 - (void)shot {
-    [self takePicture];
+    [self.grid shotWithCompletion:^{
+        [self takePicture];
+    }];
 }
 
 - (void)closePage {
@@ -162,7 +165,6 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
         [self showNextViewController];
         [self.secondViewController updateImage:_resultImage];
     } else {
-        [self.grid shot];
         self.secondViewController = [[IGSecondViewController alloc] initWithPreviousViewController:self];
         [self updateToShowCropAndScale];
     }

@@ -13,7 +13,7 @@
 - (void)showGrid;
 - (void)hideGrid;
 
-- (void)shot;
+- (void)shotWithCompletion:(void(^)())completion;
 - (void)open;
 
 @end

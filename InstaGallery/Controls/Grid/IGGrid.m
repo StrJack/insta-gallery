@@ -68,12 +68,13 @@
     CGContextStrokePath(context);
 }
 
-- (void)shot {
-    
+- (void)shotWithCompletion:(void(^)())completion {
     
     [UIView animateWithDuration:0.3 animations:^{
         _top.center = CGPointMake(self.center.x, self.center.y - self.frame.origin.y);
         _bottom.center = CGPointMake(self.center.x, self.center.y - self.frame.origin.y);
+    } completion:^(BOOL finished) {
+        completion();
     }];
     
 }

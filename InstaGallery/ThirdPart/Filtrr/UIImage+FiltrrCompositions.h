@@ -17,6 +17,7 @@
 
 -(id) trackTime:(NSString *)method;
 
+- (id) e0;
 - (id) e1;
 - (id) e2;
 - (id) e3;

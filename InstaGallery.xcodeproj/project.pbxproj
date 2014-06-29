@@ -67,6 +67,7 @@
 		AAE3912E195F32B1000F6E5F /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE3912C195F32B1000F6E5F /* brightness.png */; };
 		AAE3912F195F32B1000F6E5F /* brightness@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AAE3912D195F32B1000F6E5F /* brightness@2x.png */; };
 		AAE39132195F32CA000F6E5F /* IGBrigtnessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE39131195F32CA000F6E5F /* IGBrigtnessButton.m */; };
+		AAE39135195F3801000F6E5F /* IGRullerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE39134195F3801000F6E5F /* IGRullerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,8 @@
 		AAE3912D195F32B1000F6E5F /* brightness@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brightness@2x.png"; sourceTree = "<group>"; };
 		AAE39130195F32CA000F6E5F /* IGBrigtnessButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGBrigtnessButton.h; sourceTree = "<group>"; };
 		AAE39131195F32CA000F6E5F /* IGBrigtnessButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGBrigtnessButton.m; sourceTree = "<group>"; };
+		AAE39133195F3801000F6E5F /* IGRullerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGRullerView.h; sourceTree = "<group>"; };
+		AAE39134195F3801000F6E5F /* IGRullerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGRullerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +449,8 @@
 				AAE38F0119575593000F6E5F /* IGWaiter.m */,
 				AAE3910F1959B464000F6E5F /* IGPhotoGaleryView.h */,
 				AAE391101959B464000F6E5F /* IGPhotoGaleryView.m */,
+				AAE39133195F3801000F6E5F /* IGRullerView.h */,
+				AAE39134195F3801000F6E5F /* IGRullerView.m */,
 			);
 			name = Other;
 			path = InstaGallery/Other;
@@ -603,6 +608,7 @@
 				AA8E18591953913200780110 /* IGHorizontalScroller.m in Sources */,
 				AA8E184A1950D53000780110 /* UIImage+Scale.m in Sources */,
 				AA8E183719505ABC00780110 /* IGPickerButton.m in Sources */,
+				AAE39135195F3801000F6E5F /* IGRullerView.m in Sources */,
 				AA8E17EA194F961D00780110 /* main.m in Sources */,
 				AAE38F0219575593000F6E5F /* IGWaiter.m in Sources */,
 				AA8E18551952F2B900780110 /* IGInnerShadow.m in Sources */,

@@ -155,7 +155,7 @@
     cropRect = CGRectMake(cropRect.origin.x / imViewSideLength * imSideLength, cropRect.origin.y / imViewSideLength * imSideLength, cropRect.size.width / imViewSideLength * imSideLength, cropRect.size.height / imViewSideLength * imSideLength);
     
     UIImage *image = [IGFirstViewController cropImage:self.imageView.image byRect:cropRect];
-    _resultImage = [IGFirstViewController imageWithImage:image scaledToSize:CGSizeMake(120, 120)];
+    _resultImage = [IGFirstViewController imageWithImage:image scaledToSize:CGSizeMake(320, 320)];
     
     [self updateToEdit];
 }

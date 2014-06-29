@@ -33,6 +33,10 @@
 
 #pragma mark - Compositions
 
+-(id) e0{
+    return self;
+}
+
 -(id) e1 {
     
     UIImage *topImage = [self duplicate];

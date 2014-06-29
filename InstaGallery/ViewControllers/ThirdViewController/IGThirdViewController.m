@@ -12,6 +12,7 @@
 #import "IGFilterScrollerViewCell.h"
 
 #import "IGMiddlePanel.h"
+#import "IGRullerView.h"
 #import "IGRulerButton.h"
 #import "IGRotationButton.h"
 #import "IGContrastButton.h"
@@ -23,10 +24,10 @@
 #import "UIImage+Contrast.h"
 #import "UIImage+FiltrrCompositions.h"
 
-#define NUM_FILTERS             11
+#define NUM_FILTERS             12
 #define FILTER_LEFT_PADDING     3
 
-@interface IGThirdViewController ()
+@interface IGThirdViewController () <IGRullerViewDelegate>
 
 @property (nonatomic, strong) IGHorizontalScroller *horizontalScroller;
 @property (nonatomic, strong) IGMiddlePanel *middlePanel;
@@ -34,6 +35,11 @@
 @end
 
 @implementation IGThirdViewController {
+    BOOL _isBrightness, _isContrast;
+    NSInteger _filterNumber;
+    CGFloat _rotateAngle;
+    CGFloat _scaleKoef;
+    
     UIImage *_thumbImage;
     NSArray *_filteredImages;
 }
@@ -47,7 +53,9 @@
 - (void)renderImages{
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < NUM_FILTERS; ) {
-        [arr addObject:[_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", ++i]) withObject:nil]];
+        [arr addObject:[_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", i++]) withObject:nil]];
+        _scaleKoef = 1.;
+        _rotateAngle = 1. * M_PI_2;
         _filteredImages = arr;
     }
     NSLog(@"finish!");
@@ -66,8 +74,8 @@
     contentView.backgroundColor = [UIColor clearColor];
     
     for (int i = 0; i < NUM_FILTERS;) {
-        UIImage *thumbImage = [_thumbImage performSelector:NSSelectorFromString([NSString stringWithFormat:@"e%d", i+1])  withObject:nil];
-        NSString *filterName = [@"Filter " stringByAppendingFormat:@"%d", i+1];
+        UIImage *thumbImage = [_thumbImage performSelector:NSSelectorFromString([NSString stringWithFormat:@"e%d", i])  withObject:nil];
+        NSString *filterName = [@"Filter " stringByAppendingFormat:@"%d", i];
         
         UIView *cellView = [[IGFilterScrollerViewCell alloc] initWithThumbnail:thumbImage text:filterName];
         cellView.center = CGPointMake(i * (cellView.bounds.size.width + FILTER_LEFT_PADDING) + cellView.bounds.size.width/2, contentView.bounds.size.height/2);
@@ -76,7 +84,7 @@
         
         UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
         button.frame = cellView.bounds;
-        button.tag = ++i;
+        button.tag = i++;
         [button addTarget:self action:@selector(cellTap:) forControlEvents:(UIControlEventTouchUpInside)];
         [cellView addSubview:button];
     }
@@ -92,6 +100,7 @@
     [self.horizontalScroller addSubview:contentView];
     [self.horizontalScroller setContentSize:contentView.bounds.size];
     
+    [self.view insertSubview:self.imageView belowSubview:self.tablePanel];
     [self.tablePanel addSubview:self.horizontalScroller];
     
     // straighten tools
@@ -123,24 +132,28 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
+- (void)adjustImage {
+    
+    if (_filteredImages.count < _filterNumber)
+        self.imageView.image = [_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", _filterNumber]) withObject:nil];
+    else
+        self.imageView.image = _filteredImages[_filterNumber];
+    
+    if (_isContrast)
+        self.imageView.image = [self.imageView.image imageWithContrast:1.4];
+    if (_isBrightness)
+        self.imageView.image = [self.imageView.image imageWithBrightness:1.4];
+}
+
 #pragma mark - Actions
 - (void)makeContrast {
-    self.middlePanel.middleButton.selected = !self.middlePanel.middleButton.selected;
-    
-    if (self.middlePanel.middleButton.selected)
-        self.imageView.image = [self.imageView.image imageWithContrast:1.4];
-    else
-        self.imageView.image = _image;
-    
+    _isContrast = self.middlePanel.middleButton.selected = !self.middlePanel.middleButton.selected;
+    [self adjustImage];
 }
 
 - (void)makeBrightness {
-    self.middlePanel.leftButton.selected = !self.middlePanel.leftButton.selected;
-    
-    if (self.middlePanel.leftButton.selected)
-        self.imageView.image = [self.imageView.image imageWithBrightness:1.5];
-    else
-        self.imageView.image = _image;
+    _isBrightness = self.middlePanel.leftButton.selected = !self.middlePanel.leftButton.selected;
+    [self adjustImage];
 }
 
 - (void)close {
@@ -148,20 +161,50 @@
 }
 
 - (void)makeRotation {
-    
+    IGRullerView *rv = [[IGRullerView alloc] initWithFrame:self.middlePanel.bounds];
+    rv.scrollDelegate = self;
+    [rv animateShow:self.middlePanel];
+}
+
+#pragma mark - IGRulerViewDelegate
+- (void)rotationWithKoef:(CGFloat)koef {
+    _scaleKoef = pow((koef<1 ? 2-koef : koef), 2);
+    self.imageView.transform = CGAffineTransformConcat(CGAffineTransformMakeRotation((koef - 1) * M_PI_2),
+                                                       CGAffineTransformMakeScale(_scaleKoef, _scaleKoef));
+    _rotateAngle = ((koef - 1) * M_PI_2);
 }
 
 #pragma mark - Actions
 - (void)cellTap:(UIButton *)button {
-    if (_filteredImages.count < button.tag)
-        self.imageView.image = [_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", button.tag]) withObject:nil];
-    else
-        self.imageView.image = _filteredImages[button.tag-1];
-    
+    _filterNumber = button.tag;
+    [self adjustImage];
 }
 
 - (void)next {
-    [IGFirstViewController acomplishWithImage:self.imageView.image];
+    UIImage *image = [self rotateImage:self.imageView.image onDegrees:_rotateAngle scale:_scaleKoef];
+    
+//    NSLog(@"");
+    [IGFirstViewController acomplishWithImage:image];
+}
+
+- (UIImage *)rotateImage:(UIImage *)image onDegrees:(float)degrees scale:(CGFloat)scale
+{
+    CGFloat rads = degrees + M_PI_2;
+    float newSide = MAX([image size].width, [image size].height);
+    CGSize size =  CGSizeMake(newSide, newSide);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(ctx, newSide/2, newSide/2);
+    CGContextRotateCTM(ctx, rads);
+    CGContextScaleCTM(ctx, scale, scale);
+    CGContextDrawImage(UIGraphicsGetCurrentContext(),CGRectMake(-[image size].width/2,-[image size].height/2,size.width, size.height),image.CGImage);
+    UIImage *i = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+//    return i;
+    return [UIImage imageWithCGImage:i.CGImage
+                               scale:i.scale
+                         orientation:UIImageOrientationUpMirrored];
 }
 
 @end
