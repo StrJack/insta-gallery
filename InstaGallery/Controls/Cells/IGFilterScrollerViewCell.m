@@ -9,10 +9,10 @@
 #import "IGFilterScrollerViewCell.h"
 
 #define CELL_PADDING        5
-#define CELL_WIDTH          74
-#define CELL_HEIGHT         104
+#define CELL_WIDTH          IS_4INCH_SCREEN ? 74 : 64
+#define CELL_HEIGHT         IS_4INCH_SCREEN ? 104 : 64
 
-#define THUMBNAIL_WIDTH     64.0
+#define THUMBNAIL_WIDTH     IS_4INCH_SCREEN ? 64.0 : 44
 
 @interface IGFilterScrollerViewCell()
 
@@ -35,6 +35,7 @@
         
         self.label = [[UILabel alloc] initWithFrame:(CGRectMake(0.0, 0.0, CELL_WIDTH, 20.0))];
         self.label.center = CGPointMake(CELL_WIDTH/2, CELL_HEIGHT - 3*CELL_PADDING);
+        self.label.backgroundColor = IS_4INCH_SCREEN ? [UIColor clearColor] : bgBlackTransparentColor;
         self.label.textAlignment = NSTextAlignmentCenter;
         self.label.textColor = [UIColor whiteColor];
         self.label.font = [UIFont systemFontOfSize:13];
