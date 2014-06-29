@@ -34,7 +34,7 @@
 #pragma mark - Compositions
 
 -(id) e0{
-    return self;
+    return [self duplicate];
 }
 
 -(id) e1 {

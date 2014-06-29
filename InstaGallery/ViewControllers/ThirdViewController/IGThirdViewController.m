@@ -44,6 +44,14 @@
     NSArray *_filteredImages;
 }
 
+- (id)initWithImage:(UIImage *)image {
+    if (self = [super initWithImage:image]) {
+        _scaleKoef = 1.;
+        _rotateAngle = 0;//1. * M_PI_2;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -53,9 +61,9 @@
 - (void)renderImages{
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < NUM_FILTERS; ) {
-        [arr addObject:[_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", i++]) withObject:nil]];
-        _scaleKoef = 1.;
-        _rotateAngle = 1. * M_PI_2;
+        UIImage *image = [_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", i++]) withObject:nil];
+        [arr addObject:image];
+
         _filteredImages = arr;
     }
     NSLog(@"finish!");
@@ -134,7 +142,7 @@
 
 - (void)adjustImage {
     
-    if (_filteredImages.count < _filterNumber)
+    if (_filteredImages.count <= _filterNumber)
         self.imageView.image = [_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", _filterNumber]) withObject:nil];
     else
         self.imageView.image = _filteredImages[_filterNumber];
@@ -143,6 +151,8 @@
         self.imageView.image = [self.imageView.image imageWithContrast:1.4];
     if (_isBrightness)
         self.imageView.image = [self.imageView.image imageWithBrightness:1.4];
+    
+    self.imageView.image = [IGFirstViewController imageWithImage:self.imageView.image scaledToSize:CGSizeMake(320, 320)];
 }
 
 #pragma mark - Actions
@@ -189,7 +199,23 @@
 
 - (UIImage *)rotateImage:(UIImage *)image onDegrees:(float)degrees scale:(CGFloat)scale
 {
-    CGFloat rads = degrees + M_PI_2;
+    // no motion
+//    2014-06-29 15:49:58.580 InstaGallery[2921:60b] degrees: 1.570796
+//    2014-06-29 15:49:58.585 InstaGallery[2921:60b] rads: 3.141593
+    
+    // swipe from right to left
+//    2014-06-29 15:51:53.014 InstaGallery[2953:60b] degrees: 0.186532
+//    2014-06-29 15:51:53.018 InstaGallery[2953:60b] rads: 3.141593
+    
+    // swipt from left to right
+//    2014-06-29 15:53:27.997 InstaGallery[3014:60b] degrees: -0.373064
+//    2014-06-29 15:53:28.000 InstaGallery[3014:60b] rads: 3.141593
+    
+    
+    CGFloat rads = M_PI - degrees; //+ (degrees - M_PI_2); //+ (degrees/M_PI_2 < 1 ? -M_PI_2 : M_PI_2);
+    NSLog(@"degrees: %f", degrees);
+    NSLog(@"rads: %f",rads);
+    
     float newSide = MAX([image size].width, [image size].height);
     CGSize size =  CGSizeMake(newSide, newSide);
     UIGraphicsBeginImageContext(size);
