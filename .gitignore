@@ -7,5 +7,6 @@
 # Pods/
 
 .DS_STORE
+*.pbxuser
+project.xcworkspace
 xcuserdata
-InstaGallery.xcodeproj/project.xcworkspace/*
