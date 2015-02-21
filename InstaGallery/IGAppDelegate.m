@@ -16,7 +16,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    application.statusBarHidden = YES;
+//    application.statusBarHidden = YES;
     
     self.window.rootViewController = [[IGApplicationViewController alloc] init];
     [self.window makeKeyAndVisible];

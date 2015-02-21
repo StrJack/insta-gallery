@@ -31,6 +31,7 @@
         CGFloat thumbnailSideLength = CELL_WIDTH - 2*CELL_PADDING;
         self.thumbnail = [[UIImageView alloc] initWithFrame:(CGRectMake(CELL_PADDING, CELL_PADDING, thumbnailSideLength, thumbnailSideLength))];
         self.thumbnail.image = image;
+        self.thumbnail.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:self.thumbnail];
         
         self.label = [[UILabel alloc] initWithFrame:(CGRectMake(0.0, 0.0, CELL_WIDTH, 20.0))];

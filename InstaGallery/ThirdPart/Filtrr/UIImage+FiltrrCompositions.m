@@ -165,6 +165,7 @@
 }
 
 - (id) e9 { 
+    return [self e11];
     
     UIImage *topImage = [self duplicate];
     

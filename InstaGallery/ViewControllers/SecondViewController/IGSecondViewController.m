@@ -62,7 +62,8 @@
                      titleString:@"SCALE & CROP" forView:self.view];
     
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_WIDTH)];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.backgroundColor = [UIColor whiteColor];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;//AspectFill;
     self.imageView.image = _image;
     self.imageView.userInteractionEnabled = YES;
     LocateUnder(self.imageView, self.topPanel, 0);
@@ -101,7 +102,7 @@
 
 #pragma mark - Updating
 - (void)updateToTakePhoto {
-    [self.topPanel shouldChangeWithNew:[[IGTopPanel alloc] initWithLeftButton:[[IGCloseButton alloc] init] rightButton:nil titleString:@"TAKE A PHOTO" forView:self.view] derection:(IGDirectionTypeRight)];
+    [self.topPanel shouldChangeWithNew:[[IGTopPanel alloc] initWithLeftButton:[[IGCloseButton alloc] init] rightButton:nil titleString:@"" forView:self.view] derection:(IGDirectionTypeRight)];
     [self.tablePanel shouldChangeWithNew:nil derection:(IGDirectionTypeDown)];
     
     [self performSelector:@selector(showPreviousViewController) withObject:nil afterDelay:0.5];
@@ -127,7 +128,7 @@
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         UIImageView *imView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_WIDTH)];
-        imView.contentMode = UIViewContentModeScaleAspectFill;
+        imView.contentMode = UIViewContentModeScaleAspectFit;
         imView.image = self.imageView.image;
         [self.imageView addSubview:imView];
         

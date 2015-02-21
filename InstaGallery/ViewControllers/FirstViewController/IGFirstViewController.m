@@ -8,6 +8,7 @@
 
 #import "IGFirstViewController.h"
 #import "IGSecondViewController.h"
+#import "IGThirdViewController.h"
 
 #import "IGTopPanel.h"
 #import "IGMiddlePanel.h"
@@ -36,7 +37,6 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
 @implementation IGFirstViewController
 
 + (void)acomplishWithImage:(UIImage *)image {
-    NSLog(@"");
     static_completion_block(image, static_image_picker);
 }
 
@@ -45,11 +45,11 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
         static_image_picker = self;
         static_completion_block = completionBlock;
         
+        self.view.backgroundColor = [UIColor blackColor];
         self.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.delegate = self;
         self.showsCameraControls = NO;
         self.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
-        
     }
     return self;
 }
@@ -89,21 +89,20 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
 }
 
 #pragma mark - Shows
-- (void)updateToShowCropAndScale {
-    IGTopPanel *newTopPanel = [[IGTopPanel alloc] initWithLeftButton:[[IGPreviousButton alloc] init] rightButton:nil titleString:@"SCALE & CROP" forView:self.view];
+- (void)updateToEdit {
+    IGTopPanel *newTopPanel = [[IGTopPanel alloc] initWithLeftButton:[[IGPreviousButton alloc] init] rightButton:nil titleString:@"EDIT" forView:self.view];
     [self.topPanel shouldChangeWithNew:newTopPanel derection:(IGDirectionTypeLeft)];
     self.topPanel = newTopPanel;
     
     IGTablePanel *newTablePanel = [[IGTablePanel alloc] initRelativelyLast:self.grid andBase:self.view];
     [self.tablePanel shouldChangeWithNew:newTablePanel derection:(IGDirectionTypeRight)];
     
-//    [self shot];
     [self performSelector:@selector(showNextViewController) withObject:nil afterDelay:0.5];
 }
 
 - (void)showNextViewController {
     
-    [self presentViewController:self.secondViewController animated:NO completion:nil];
+    [self presentViewController:self.thirdViewController animated:NO completion:nil];
 }
 
 #pragma mark - Actions
@@ -142,15 +141,18 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
 }
 
 #pragma mark - UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 //    NSLog(@"%s", __PRETTY_FUNCTION__);
-    if (picker != self) {
+    UIImage *image = (UIImage*) [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
         [picker dismissViewControllerAnimated:YES completion:^{
             UIImage *newImage = rotate(image, UIImageOrientationDown);
-            CGRect gridRect = CGRectMake(0.0f, (newImage.size.height - newImage.size.width)/2, newImage.size.width, newImage.size.width);
-            _resultImage = [IGFirstViewController cropImage:image byRect:gridRect];
+//            CGRect gridRect = CGRectMake(0.0f, (newImage.size.height - newImage.size.width)/2, newImage.size.width, newImage.size.width);
+            _resultImage = newImage;//[IGFirstViewController cropImage:image byRect:gridRect];
             
-            self.secondViewController = [[IGSecondViewController alloc] initWithPreviousViewController:self];
+//            self.secondViewController = [[IGSecondViewController alloc] initWithPreviousViewController:self];
+            self.thirdViewController = [[IGThirdViewController alloc] initWithPreviousViewController:self];
             [self showNextViewController];
         }];
         return;
@@ -160,14 +162,10 @@ static void(^static_completion_block)(UIImage *image, UIImagePickerController *)
     
     CGRect gridRect = CGRectMake(0.0f, (image.size.height - image.size.width)/2, image.size.width, image.size.width);
     _resultImage = [IGFirstViewController cropImage:image byRect:gridRect];
+    _resultImage = [IGFirstViewController imageWithImage:_resultImage scaledToSize:(CGSizeMake(320, 320))];
     
-    if (self.secondViewController) {
-        [self showNextViewController];
-        [self.secondViewController updateImage:_resultImage];
-    } else {
-        self.secondViewController = [[IGSecondViewController alloc] initWithPreviousViewController:self];
-        [self updateToShowCropAndScale];
-    }
+    self.thirdViewController = [[IGThirdViewController alloc] initWithPreviousViewController:self];
+    [self updateToEdit];
 }
 
 #pragma mark - Additional Functions

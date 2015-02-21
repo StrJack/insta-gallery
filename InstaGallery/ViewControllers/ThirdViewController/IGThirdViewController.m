@@ -24,7 +24,7 @@
 #import "UIImage+Contrast.h"
 #import "UIImage+FiltrrCompositions.h"
 
-#define NUM_FILTERS             12
+#define NUM_FILTERS             11
 #define FILTER_LEFT_PADDING     3
 
 @interface IGThirdViewController () <IGRullerViewDelegate>
@@ -42,6 +42,8 @@
     
     UIImage *_thumbImage;
     NSArray *_filteredImages;
+    
+    UIActivityIndicatorView *_activityInd;
 }
 
 - (id)initWithImage:(UIImage *)image {
@@ -81,9 +83,22 @@
     UIView *contentView = [[UIView alloc] initWithFrame:(CGRectMake(0.0, 0.0, contentViewWidth, [IGFilterScrollerViewCell cellHeight]))];
     contentView.backgroundColor = [UIColor clearColor];
     
+    NSArray *filtersNames = @[
+                              @"Normal",
+                              @"Amaro",
+                              @"Walden",
+                              @"EarlyBird",
+                              @"Sutro",
+                              @"Warm",
+                              @"Toaster",
+                              @"Frozen",
+                              @"Rise",
+                              @"Brannan",
+                              @"Sepia",
+                              ];
     for (int i = 0; i < NUM_FILTERS;) {
         UIImage *thumbImage = [_thumbImage performSelector:NSSelectorFromString([NSString stringWithFormat:@"e%d", i])  withObject:nil];
-        NSString *filterName = [@"Filter " stringByAppendingFormat:@"%d", i];
+        NSString *filterName = filtersNames[i];//[@"Filter " stringByAppendingFormat:@"%d", i];
         
         UIView *cellView = [[IGFilterScrollerViewCell alloc] initWithThumbnail:thumbImage text:filterName];
         cellView.center = CGPointMake(i * (cellView.bounds.size.width + FILTER_LEFT_PADDING) + cellView.bounds.size.width/2, contentView.bounds.size.height/2);
@@ -141,10 +156,23 @@
 }
 
 - (void)adjustImage {
+    if (!_activityInd) {
+        _activityInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleWhiteLarge)];
+        _activityInd.center = CGPointMake(self.imageView.frame.size.width/2, self.imageView.frame.size.height/2);
+        [_activityInd startAnimating];
+        [self.imageView addSubview:_activityInd];
+//        [self adjustImage];
+        [self performSelector:@selector(adjustImage) withObject:nil afterDelay:0.01];
+        return;
+    }
     
-    if (_filteredImages.count <= _filterNumber)
+    if (_filteredImages.count <= _filterNumber) {
+        
+        
         self.imageView.image = [_image performSelector:NSSelectorFromString([@"e" stringByAppendingFormat:@"%d", _filterNumber]) withObject:nil];
-    else
+        
+        
+    } else
         self.imageView.image = _filteredImages[_filterNumber];
     
     if (_isContrast)
@@ -152,7 +180,27 @@
     if (_isBrightness)
         self.imageView.image = [self.imageView.image imageWithBrightness:1.4];
     
-    self.imageView.image = [IGFirstViewController imageWithImage:self.imageView.image scaledToSize:CGSizeMake(320, 320)];
+    
+    [_activityInd removeFromSuperview];
+    _activityInd = nil;
+    
+    
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.image = [IGFirstViewController imageWithImage:[self imageWithView:self.imageView] scaledToSize:self.imageView.frame.size];
+    
+    
+}
+
+- (UIImage *) imageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return img;
 }
 
 #pragma mark - Actions
@@ -171,9 +219,11 @@
 }
 
 - (void)makeRotation {
-    IGRullerView *rv = [[IGRullerView alloc] initWithFrame:self.middlePanel.bounds];
-    rv.scrollDelegate = self;
-    [rv animateShow:self.middlePanel];
+    CGFloat angle = [(NSNumber *)[self.imageView valueForKeyPath:@"layer.transform.rotation.z"] floatValue];
+    self.imageView.transform = CGAffineTransformMakeRotation(angle + M_PI_2);
+//    IGRullerView *rv = [[IGRullerView alloc] initWithFrame:self.middlePanel.bounds];
+//    rv.scrollDelegate = self;
+//    [rv animateShow:self.middlePanel];
 }
 
 #pragma mark - IGRulerViewDelegate
@@ -191,7 +241,8 @@
 }
 
 - (void)next {
-    UIImage *image = [self rotateImage:self.imageView.image onDegrees:_rotateAngle scale:_scaleKoef];
+    CGFloat angle = [(NSNumber *)[self.imageView valueForKeyPath:@"layer.transform.rotation.z"] floatValue];
+    UIImage *image = [self rotateImage:self.imageView.image onDegrees:angle scale:_scaleKoef];
     
 //    NSLog(@"");
     [IGFirstViewController acomplishWithImage:image];
@@ -199,19 +250,6 @@
 
 - (UIImage *)rotateImage:(UIImage *)image onDegrees:(float)degrees scale:(CGFloat)scale
 {
-    // no motion
-//    2014-06-29 15:49:58.580 InstaGallery[2921:60b] degrees: 1.570796
-//    2014-06-29 15:49:58.585 InstaGallery[2921:60b] rads: 3.141593
-    
-    // swipe from right to left
-//    2014-06-29 15:51:53.014 InstaGallery[2953:60b] degrees: 0.186532
-//    2014-06-29 15:51:53.018 InstaGallery[2953:60b] rads: 3.141593
-    
-    // swipt from left to right
-//    2014-06-29 15:53:27.997 InstaGallery[3014:60b] degrees: -0.373064
-//    2014-06-29 15:53:28.000 InstaGallery[3014:60b] rads: 3.141593
-    
-    
     CGFloat rads = M_PI - degrees; //+ (degrees - M_PI_2); //+ (degrees/M_PI_2 < 1 ? -M_PI_2 : M_PI_2);
     NSLog(@"degrees: %f", degrees);
     NSLog(@"rads: %f",rads);

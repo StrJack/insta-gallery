@@ -22,7 +22,7 @@
             [baseView addSubview:self];
         }
         
-        self.backgroundColor = bgBlackTransparentColor;
+        self.backgroundColor = [UIColor blackColor];//bgBlackTransparentColor;
         
         UILabel *lblTitle = [[UILabel alloc] initWithFrame:self.bounds];
         lblTitle.font = [UIFont boldSystemFontOfSize:18.0f];
